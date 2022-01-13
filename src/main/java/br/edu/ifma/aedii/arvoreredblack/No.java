@@ -1,15 +1,14 @@
 package br.edu.ifma.aedii.arvoreredblack;
 
 public class No {
-    public Integer v;// Um valor inteiro, que será a chave para busca, inserção, remoção.
-    public No p, esq, dir;//Caminho para o Pai, filho a Esquerda e Filho a Direita
-    public boolean Cor;//Boolean que vai definir as cores, sendo True Vermelha e False Preta
+    public Integer v; // Um valor inteiro, que será a chave para busca, inserção, remoção.
+    public No p, esq, dir; //Caminho para o Pai, filho a Esquerda e Filho a Direita
+    public boolean Cor; //Boolean que vai definir as cores, sendo True Vermelha e False Preta
 
     public No(int i, boolean c) {
         this.v = i;
         this.Cor = c;
         this.p = this.esq = this.dir = Arvore.nil;
-
     }
 
     public No encontra(int n) {
@@ -62,7 +61,8 @@ public class No {
     public void grafico() {
         if (this.Cor) {
             System.out.println("\t" + this.v + " [style = filled, fillcolor = red];");
-        } else {
+        }
+        else {
             System.out.println("\t" + this.v + " [style = filled, fillcolor = black, fontcolor = white];");
         }
 

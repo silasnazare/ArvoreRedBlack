@@ -13,10 +13,9 @@ public class Arvore {
         this.raiz = new No(v, false);
     }
 
-    public void insercao (int n) {
+    public void insercao(int n) {
 
         if (this.raiz == Arvore.nil) {
-
             this.raiz = new No (n, false);
         }
         else {
@@ -44,8 +43,8 @@ public class Arvore {
         return res;
     }
 
-	/*public void insercao(int i, No r) {
-		//No aux = new No(i,false);
+	public void insercao(int i, No r) {
+		No aux = new No(i,false);
 
 		if (r.getV() > i) {
 			//esquerda
@@ -55,7 +54,8 @@ public class Arvore {
 				r.getEsq().setP(r);
 				balanceamentoInsercao(r.getEsq());
 			}
-		} else if(r.getV() < i) {
+		}
+        else if (r.getV() < i) {
 			//Direita
 			if (r.getDir() != null) insercao(i, r.getDir());
 			else {
@@ -63,10 +63,11 @@ public class Arvore {
 				r.getDir().setP(r);
 				balanceamentoInsercao(r.getDir());
 			}
-		} else return;
-	}*/
+		}
+        else return;
+	}
 
-/*	//Forma mais Visual de Entendimento do Codigo
+	//Forma mais Visual de Entendimento do Codigo
 	public void balanceamentoEspecifico(No filho) {
 		//Caso01
 		if (filho.getP().getP().getEsq().isCor() && filho.getP().getP().getDir().isCor()) {
@@ -94,23 +95,23 @@ public class Arvore {
 				}
 			}
 
-			} else if (filho.getP().getDir() == filho) {
-				if (filho.getP().getP().getEsq() == filho.getP()) {
-					if (!filho.getP().getP().getDir().isCor() || filho.getP().getP().getDir() == null && filho.getP().isCor()) {
-						rotacao_esq(filho);
-						rotacao_dir(filho.getP());
-						balanceamentoEspecifico(filho.getP());
-					}
-				}
-				else {
-					if (!filho.getP().getP().getEsq().isCor() || filho.getP().getP().getEsq() == null && filho.getP().isCor()) {
-						rotacao_dir(filho.getP());
-						balanceamentoEspecifico(filho.getP());
-					}
-				}
-			}
-	}*/
-
+        }
+        else if (filho.getP().getDir() == filho) {
+            if (filho.getP().getP().getEsq() == filho.getP()) {
+                if (!filho.getP().getP().getDir().isCor() || filho.getP().getP().getDir() == null && filho.getP().isCor()) {
+                    rotacao_esq(filho);
+                    rotacao_dir(filho.getP());
+                    balanceamentoEspecifico(filho.getP());
+                }
+            }
+            else {
+                if (!filho.getP().getP().getEsq().isCor() || filho.getP().getP().getEsq() == null && filho.getP().isCor()) {
+                    rotacao_dir(filho.getP());
+                    balanceamentoEspecifico(filho.getP());
+                }
+            }
+        }
+	}
 
     public void transplant(No x, No y) {
         if (x.p == Arvore.nil) this.raiz = y;
@@ -128,10 +129,12 @@ public class Arvore {
             if (z.esq == Arvore.nil) {
                 x = z.dir;
                 this.transplant(z, z.dir);
-            } else if (z.dir == Arvore.nil) {
+            }
+            else if (z.dir == Arvore.nil) {
                 x = z.esq;
                 this.transplant(z, z.esq);
-            } else {
+            }
+            else {
                 y = z.sucessor();
                 cordey = y.Cor;
                 x = y.dir;
@@ -168,7 +171,8 @@ public class Arvore {
                 if (!x.esq.Cor && !x.dir.Cor) { // caso 2
                     x.Cor = true;
                     n = n.p;
-                } else {
+                }
+                else {
                     if (!x.dir.Cor) { // caso 3
                         x.esq.Cor = false;
                         x.Cor = true;
@@ -182,7 +186,8 @@ public class Arvore {
                     this.rotacao_esq(n.p);
                     n = this.raiz;
                 }
-            } else {
+            }
+            else {
                 x = n.p.esq;
 
                 if (x.Cor) { // caso 1
@@ -194,7 +199,8 @@ public class Arvore {
                 if (!x.esq.Cor && !x.dir.Cor) { // caso 2
                     x.Cor = true;
                     n = n.p;
-                } else {
+                }
+                else {
                     if (!x.esq.Cor) { // caso 3
                         x.dir.Cor = false;
                         x.Cor = true;
@@ -225,7 +231,8 @@ public class Arvore {
                     y.Cor = false;
                     z.p.p.Cor = true;
                     z = z.p.p;
-                } else { // Ou seja, tio � preto
+                }
+                else { // Ou seja, tio � preto
                     if (z == z.p.dir) { // caso 2
                         z = z.p;
                         this.rotacao_esq(z);
@@ -235,13 +242,15 @@ public class Arvore {
                     z.p.p.Cor = true;
                     this.rotacao_dir(z.p.p);
                 }
-            } else {
+            }
+            else {
                 y = z.p.p.esq;
                 if (y.Cor) { // caso 1
                     y.Cor = z.p.Cor = false;
                     z.p.p.Cor = true;
                     z = z.p.p;
-                } else {
+                }
+                else {
                     if (z == z.p.esq) { // caso 2
                         z = z.p;
                         this.rotacao_dir(z);
@@ -265,7 +274,7 @@ public class Arvore {
 			x.setDir(x.getP());
 			x.getDir().setCor(true);
 			x.getEsq().setCor(true);
-			if(x.getDir() != raiz) {
+			if (x.getDir() != raiz) {
 				x.setP(x.getDir().getP());
 				x.getDir().setP(x);
 			}
@@ -293,7 +302,6 @@ public class Arvore {
 		}
 	}
 
-
 	public void rotacao_esq(No x) {
 
 		if (x.getDir() == null) {
@@ -302,7 +310,7 @@ public class Arvore {
 			x.setEsq(x.getP());
 			x.getDir().setCor(true);
 			x.getEsq().setCor(true);
-			if(x.getDir() != raiz) {
+			if (x.getDir() != raiz) {
 				x.setP(x.getEsq().getP());
 				x.getEsq().setP(x);
 			}

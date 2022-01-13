@@ -1,30 +1,22 @@
 package br.edu.ifma.aedii.entrada;
 
-import br.edu.ifma.aedii.arvoreredblack.Arvore;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 public class Entrada {
-    public static void leituraDeArquivo(String caminho) {
-        String linha = new String();
-        File arg = new File(caminho);
-        Arvore a = new Arvore(1);
+    public static int lerArquivo(String caminho) {
+        File arquivo = new File(caminho);
+        int conteudo = 0;
 
-        if (arg.exists()) {
-            try{
-                FileReader leitordeArquivo = new FileReader(caminho);
-                BufferedReader bufferdeArquivo = new BufferedReader(leitordeArquivo);
-                while(true) {
-                    linha = bufferdeArquivo.readLine();
-                    if(linha==null)
-                        break;
-
-                    a.insercao(Integer.parseInt(linha));
-                }
-            } catch(Exception e) {
-            }
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(arquivo)));
+            String linha = "";
+            linha = br.readLine();
+            conteudo = Integer.parseInt(linha);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return conteudo;
     }
 }
